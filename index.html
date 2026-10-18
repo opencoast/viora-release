@@ -190,6 +190,30 @@ code{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.86em}
   padding:.15rem .5rem; border-radius:6px; border:1px solid var(--line-2);
   background:var(--wall-2); min-width:1.7rem; text-align:center;
 }
+/* The two things 1.10 leads with: a gold wash, a gold edge and a badge. */
+.card.spot{
+  position:relative; border-color:color-mix(in srgb,var(--gold) 58%,var(--line));
+  background:
+    radial-gradient(120% 90% at 0% 0%,color-mix(in srgb,var(--gold) 16%,transparent),transparent 62%),
+    var(--surface);
+  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--gold) 28%,transparent);
+}
+.card.spot:hover{border-color:var(--gold)}
+.card.spot .key{border-color:color-mix(in srgb,var(--gold) 38%,var(--line-2))}
+.badge-new{
+  display:inline-flex; align-items:center; font-family:"IBM Plex Mono",monospace; font-size:.66rem; font-weight:600;
+  letter-spacing:.12em; text-transform:uppercase; line-height:1; color:#171205; white-space:nowrap;
+  padding:.32rem .6rem; border-radius:999px; background:linear-gradient(160deg,var(--board-hi),var(--board-lo));
+}
+.card.spot .badge-new{position:absolute; top:1.45rem; right:1.4rem}
+.new-chip{
+  display:inline-flex; align-items:center; gap:.6rem; align-self:flex-start; max-width:100%;
+  padding:.3rem .85rem .3rem .3rem; border-radius:999px; text-decoration:none; color:var(--ink-2); font-size:.9rem;
+  border:1px solid color-mix(in srgb,var(--gold) 50%,var(--line));
+  background:color-mix(in srgb,var(--gold) 9%,transparent); transition:border-color .2s ease;
+}
+.new-chip:hover{border-color:var(--gold)}
+.new-chip span:last-child{min-width:0}
 
 .origin{position:relative; height:420vh}
 .origin-sticky{
@@ -382,6 +406,16 @@ code{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.86em}
 .trust{display:grid; grid-template-columns:repeat(2,1fr); gap:.7rem 2rem; margin-top:.6rem; max-width:680px; text-align:left}
 .trust div{display:grid; grid-template-columns:auto 1fr; gap:.6rem; font-size:.9rem; color:var(--ink-3); line-height:1.45}
 .trust .ck{color:var(--gold); font-weight:700}
+.first-open,.news{width:100%; max-width:680px; text-align:left}
+.first-open{display:grid; gap:.45rem; border-left:2px solid var(--gold); padding:.15rem 0 .15rem 1rem;
+  font-size:.88rem; color:var(--ink-3); line-height:1.55}
+.first-open b,.news li b{color:var(--ink-2); font-weight:600}
+.first-open code{font-family:"IBM Plex Mono",monospace; font-size:.78rem; overflow-wrap:anywhere}
+.news{display:grid; gap:.8rem; border:1px solid var(--line); border-radius:16px; padding:1.2rem 1.4rem}
+.news ul{list-style:none; margin:0; padding:0; display:grid; gap:.55rem}
+.news li{position:relative; padding-left:1.25rem; font-size:.92rem; color:var(--ink-3); line-height:1.5}
+.news li::before{content:"+"; position:absolute; left:0; top:0; color:var(--gold); font-weight:700}
+.news-note{font-size:.84rem; color:var(--faint); line-height:1.5}
 
 footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); background:var(--wall)}
 .foot{display:flex; flex-wrap:wrap; gap:1.2rem 2rem; align-items:center; justify-content:space-between}
@@ -535,6 +569,42 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
 .ui-film button{width:72px; flex:none}
 .ui-film .thumb{display:block; height:48px; border-radius:8px; border:1px solid transparent; overflow:hidden}
 .ui-film button.on .thumb{border-color:var(--gold)}
+.ui-beats .beat-new{margin-left:.35rem; font-family:"IBM Plex Mono",monospace; font-size:.6rem; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--gold)}
+.ui-beats button.beat-spot{border-color:color-mix(in srgb,var(--gold) 55%,var(--line-2))}
+.ui-beats button.on .beat-new{color:#171205}
+#uiPlugins{cursor:pointer}
+#uiPlugins.on{color:var(--gold)}
+.ui-store{
+  position:absolute; inset:0; z-index:5; display:grid; grid-template-rows:auto minmax(0,1fr) auto; gap:12px;
+  padding:14px 16px; background:var(--wall); opacity:0; visibility:hidden;
+  transform:translateY(10px); transition:opacity .28s ease, transform .28s ease, visibility .28s;
+}
+.ui-store.open{opacity:1; visibility:visible; transform:none}
+.ui-store-head{display:flex; align-items:center; gap:14px}
+.ui-store-head strong{font-family:"Fraunces",serif; font-size:20px; font-weight:600}
+.ui-store-tabs{display:flex; gap:4px; padding:3px; border-radius:999px; background:var(--wall-2); border:1px solid var(--ui-line)}
+.ui-store-tabs span{padding:4px 12px; border-radius:999px; font-size:12px; font-weight:650; color:var(--ui-muted)}
+.ui-store-tabs span.on{color:#171205; background:linear-gradient(160deg,var(--board-hi),var(--board-lo))}
+.ui-window .ui-store-head button{margin-left:auto; color:var(--ui-muted); font-size:20px; line-height:1}
+.ui-store-head button:hover{color:var(--ink)}
+.ui-store-list{display:grid; gap:10px; align-content:start; overflow:auto}
+.ui-plug{
+  display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:12px; align-items:start;
+  padding:12px; border:1px solid var(--ui-line); border-radius:12px; background:var(--surface);
+}
+.ui-plug-ic{display:grid; place-items:center; width:34px; height:34px; border-radius:9px; color:var(--gold); background:var(--wall-2)}
+.ui-plug-ic svg{width:20px; height:20px}
+.ui-plug-copy strong{display:block; font-size:14px; font-weight:650}
+.ui-plug-copy small{display:block; margin-top:2px; font-family:"IBM Plex Mono",monospace; font-size:10.5px; color:var(--faint)}
+.ui-plug-copy p{margin:6px 0 0; font-size:12.5px; line-height:1.45; color:var(--ui-muted)}
+.ui-window .ui-install{
+  align-self:center; min-width:86px; padding:6px 12px; border-radius:999px; font-size:12px; font-weight:650;
+  color:#171205; background:linear-gradient(160deg,var(--board-hi),var(--board-lo)); transition:filter .2s ease;
+}
+.ui-window .ui-install.busy{filter:saturate(.4) brightness(.9)}
+.ui-window .ui-install.done{color:var(--gold); background:transparent; box-shadow:inset 0 0 0 1px var(--gold)}
+.ui-store-foot{margin:0; font-size:11.5px; color:var(--faint)}
 .ui-cursor{
   position:absolute; z-index:6; width:16px; height:16px; margin:-2px 0 0 -2px; border-radius:50%;
   border:2px solid #fff; background:color-mix(in srgb,var(--gold) 75%,#000);
@@ -567,6 +637,8 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
   .nav-links{width:100%; justify-content:flex-start}
   .nav-links a{font-size:.86rem}
   .tag{letter-spacing:.12em; line-height:1.45; text-wrap:balance}
+  .ui-plug{grid-template-columns:auto minmax(0,1fr)}
+  .ui-window .ui-install{grid-column:2; justify-self:start}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important}
@@ -616,11 +688,12 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
     <div class="hero-copy">
       <span class="tag">Personal media library</span>
       <h1>Your library, kept like a <em>book</em> on the shelf.</h1>
-      <p class="lede">Viora is a desktop library for photos, video, comics, illustrations and novels. One quiet window for what you already keep at home or on a NAS.</p>
+      <p class="lede">Viora is a desktop library for photos, video, comics, illustrations and novels. One quiet window for what you already keep at home or on a NAS, and a read-only page your phone can open.</p>
       <div class="cta-row">
         <a class="btn btn-gold" href="#download">Download Viora</a>
         <a class="btn btn-ghost" href="#features">Core features</a>
       </div>
+      <a class="new-chip" href="#agents"><span class="badge-new">New in 1.10</span><span>Your agent over MCP &middot; the Plugins Store &rarr;</span></a>
       <span class="hint" data-release-summary>Free &middot; v1.10.0 &middot; updated 2026.10.18 &middot; Apple Silicon &middot; Intel &middot; Windows</span>
     </div>
     <div class="hero-art">
@@ -671,7 +744,7 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
       <article class="hl reveal">
         <span class="n">02</span>
         <h3>This computer or a NAS</h3>
-        <p>One Go server. The desktop starts it on loopback, or you run the same binary in Docker on the shelf, with several libraries if you want them.</p>
+        <p>One Go server. The desktop starts it on loopback, or you run the same binary in Docker on the shelf, with several libraries if you want them. A phone reads either one in its browser.</p>
       </article>
       <article class="hl reveal">
         <span class="n">03</span>
@@ -681,7 +754,7 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
       <article class="hl reveal">
         <span class="n">04</span>
         <h3>Quiet until you ask</h3>
-        <p>No account to begin. Plugins, model packs and a NAS password appear only when you choose them. The wall works with none of that installed.</p>
+        <p>No account to begin. Plugins, model packs, a NAS password and an agent's key appear only when you choose them. The wall works with none of that installed.</p>
       </article>
     </div>
   </div>
@@ -710,6 +783,7 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
         <button type="button" data-beat="recent">Continue from recent</button>
         <button type="button" data-beat="sort">Sort on the wall</button>
         <button type="button" data-beat="search">Search without leaving</button>
+        <button type="button" data-beat="store" class="beat-spot">Plugins Store <span class="beat-new">New</span></button>
       </div>
       <p class="ui-caption" id="uiCaption" aria-live="polite">Rest on a video. The next frames play on the card.</p>
       <div class="ui-window" id="uiWindow">
@@ -726,7 +800,7 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
             <button type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17.8V6.2a2.1 2.1 0 0 1 2.1-2.1H9.1l2.3 2.5h7.5a2.1 2.1 0 0 1 2.1 2.1v9.1a2.1 2.1 0 0 1-2.1 2.1H5.1a2.1 2.1 0 0 1-2.1-2.1z"/></svg>Films<small>24</small></button>
             <button type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17.8V6.2a2.1 2.1 0 0 1 2.1-2.1H9.1l2.3 2.5h7.5a2.1 2.1 0 0 1 2.1 2.1v9.1a2.1 2.1 0 0 1-2.1 2.1H5.1a2.1 2.1 0 0 1-2.1-2.1z"/></svg>Books<small>16</small></button>
           </div>
-          <div class="ui-rail-foot"><span>Activity</span><i></i><span>Plugins</span></div>
+          <div class="ui-rail-foot"><span>Activity</span><i></i><span id="uiPlugins" role="button" tabindex="-1">Plugins</span></div>
         </aside>
         <div class="ui-main">
           <header class="ui-head">
@@ -764,6 +838,34 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
               <div class="ui-viewer-art" id="uiViewerArt"></div>
               <div class="ui-film" id="uiFilm"></div>
             </div>
+            <div class="ui-store" id="uiStore">
+              <div class="ui-store-head">
+                <strong>Plugins</strong>
+                <div class="ui-store-tabs"><span>Installed</span><span class="on">Store</span></div>
+                <button type="button" id="uiStoreClose" aria-label="Close Plugins">&times;</button>
+              </div>
+              <div class="ui-store-list">
+                <div class="ui-plug">
+                  <span class="ui-plug-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h14"/></svg></span>
+                  <div class="ui-plug-copy">
+                    <strong>Doujin galleries</strong>
+                    <small>Source &middot; 1.0.9</small>
+                    <p>Looks up books, artists and new works from gallery sites, and fills in a profile for someone you have already linked.</p>
+                  </div>
+                  <button type="button" class="ui-install">Install</button>
+                </div>
+                <div class="ui-plug">
+                  <span class="ui-plug-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.9 2.6h10.2a2.5 2.5 0 0 1 2.5 2.5v13.8a2.5 2.5 0 0 1-2.5 2.5H6.9a2.5 2.5 0 0 1-2.5-2.5V5.1a2.5 2.5 0 0 1 2.5-2.5z"/><circle cx="12" cy="9.8" r="2.55"/><path d="M8.2 17.9c0-3.4 7.6-3.4 7.6 0"/></svg></span>
+                  <div class="ui-plug-copy">
+                    <strong>Viora recognition</strong>
+                    <small>Model pack &middot; 1.0.0</small>
+                    <p>Tags and people from a model pack that runs on this machine. Its weights download only after you accept the licence.</p>
+                  </div>
+                  <button type="button" class="ui-install">Install</button>
+                </div>
+              </div>
+              <p class="ui-store-foot">From the official catalog, or through a proxy. Nothing installs until you choose it.</p>
+            </div>
             <div class="ui-cursor" id="uiCursor" aria-hidden="true"></div>
           </div>
         </div>
@@ -772,18 +874,41 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
     </figure>
 
     <div class="fgrid">
+      <article class="card spot reveal" id="agents">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 8.5,10.2 V 7.6 a 3.5,3.5 0 0 1 7,0 V 10.2"/><path d="M 6.7,10.2 H 17.3 a 2.1,2.1 0 0 1 2.1,2.1 V 18.9 a 2.1,2.1 0 0 1 -2.1,2.1 H 6.7 a 2.1,2.1 0 0 1 -2.1,-2.1 V 12.3 a 2.1,2.1 0 0 1 2.1,-2.1 Z"/><circle cx="12" cy="15.4" r="1.3"/></svg>
+        <span class="badge-new">New in 1.10</span>
+        <h3>Your own agent, by invitation</h3>
+        <p>Viora no longer ships an assistant of its own. A library can instead hand the agent you already use — Claude, LM Studio or any MCP client — a set of tools: look around, search, read an item, see a picture or a frame. Allow changes, and it can make folders, rename, move and trash, each step in Activity marked as an agent's and undoable. Allow notes, and it can write down what it saw for its next search. Off by default, one key per library, shown once.</p>
+        <div class="keys"><span class="key">MCP</span><span class="key">Off by default</span><span class="key">Undoable</span></div>
+      </article>
+
+      <article class="card spot reveal" id="store">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h14"/></svg>
+        <span class="badge-new">New in 1.10</span>
+        <h3>The Plugins Store, when the shelf should reach further</h3>
+        <p>Comic indexes, discovery, downloads and recognition are plugins, not a list of sites built into the app. Open Plugins &rarr; Store, pick a source or a model pack from the official catalog and install it — through a proxy if your line needs one — or pack your own with <code>viora-plugin</code>. With none installed, those shelves stay hidden: the app does not know a site until a plugin says so.</p>
+        <div class="keys"><span class="key">Store</span><span class="key">Sources</span><span class="key">Model packs</span><span class="key">Install on purpose</span></div>
+      </article>
+
       <article class="card reveal">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 5.7,4.8 H 18.3 a 2.5,2.5 0 0 1 2.5,2.5 V 16.7 a 2.5,2.5 0 0 1 -2.5,2.5 H 5.7 a 2.5,2.5 0 0 1 -2.5,-2.5 V 7.3 a 2.5,2.5 0 0 1 2.5,-2.5 Z"/><path d="M 10.4,9.2 L 15.4,12 L 10.4,14.8 Z" fill="currentColor" stroke="none"/></svg>
         <h3>A room for each kind of file</h3>
-        <p>A photo opens full-bleed, with a filmstrip of its neighbours. Video plays the original file, and resting on a video card can cross-fade through preview frames. Comics turn by page or as a spread, left to right or right to left. Novels are their own reading room. Each player takes the window, then returns you to the wall.</p>
+        <p>A photo opens full-bleed, with a filmstrip of its neighbours. Video plays the original file, and resting on a video card can cross-fade through preview frames. A format the window cannot play converts on this machine — on the Mac's hardware encoder where there is one — and starts playing before the conversion is done. Comics turn by page or as a spread, left to right or right to left. Novels are their own reading room. Each player takes the window, then returns you to the wall.</p>
         <div class="keys"><span class="key">Photos</span><span class="key">Video</span><span class="key">Comics</span><span class="key">Novels</span></div>
       </article>
 
       <article class="card reveal">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 3,17.8 V 6.2 a 2.1,2.1 0 0 1 2.1,-2.1 H 9.1 l 2.3,2.5 H 18.9 a 2.1,2.1 0 0 1 2.1,2.1 V 17.8 a 2.1,2.1 0 0 1 -2.1,2.1 H 5.1 a 2.1,2.1 0 0 1 -2.1,-2.1 Z"/></svg>
         <h3>The file keeps its place in the library</h3>
-        <p>Rename, move or trash from the wall. The library follows the file, so a name change in place does not drop the metadata you already attached. Deleted items sit in a bin you can restore. A Collection can mix loose files, whole folders and live tags — cover, accent and density included — without moving or copying anything on disk. Collections live on this computer.</p>
-        <div class="keys"><span class="key">Rename</span><span class="key">Move</span><span class="key">Trash</span><span class="key">Collections</span></div>
+        <p>Rename, move or trash from the wall. The library follows the file, so a name change in place does not drop the metadata you already attached. Deleted items sit in a bin you can restore. Activity keeps thirty days of changes — yours and an agent's — to filter by day or by who made them, and to undo from. Gather a set of files and rename them together: find and replace, a prefix or a suffix, the extension left alone. A Collection can mix loose files, whole folders and live tags — cover, accent and density included — without moving or copying anything on disk. Collections live on this computer.</p>
+        <div class="keys"><span class="key">Rename</span><span class="key">Move</span><span class="key">Trash</span><span class="key">30-day history</span><span class="key">Collections</span></div>
+      </article>
+
+      <article class="card reveal">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M 8.4,2.6 H 15.6 a 2.4,2.4 0 0 1 2.4,2.4 V 19 a 2.4,2.4 0 0 1 -2.4,2.4 H 8.4 a 2.4,2.4 0 0 1 -2.4,-2.4 V 5 a 2.4,2.4 0 0 1 2.4,-2.4 Z"/><path d="M 10.6,18.4 H 13.4"/></svg>
+        <h3>On your phone, from the same server</h3>
+        <p>The server carries a read-only page of its own. Unlock a library, walk its folders, search, and open photos, video, comics and novels — EPUB and PDF included. Photos arrive at screen size, not as whole originals. Add it to the home screen and, over https, the page keeps working offline. A library on this computer lets a phone in from the library screen: off until you turn it on, and only with a password.</p>
+        <div class="keys"><span class="key">Read-only</span><span class="key">Home screen</span><span class="key">Let a phone in</span></div>
       </article>
 
       <article class="card reveal">
@@ -791,13 +916,6 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
         <h3>The same server, at home or on a shelf</h3>
         <p>Packaged Viora carries its own local server and starts it only after you choose this computer. Server mode is that binary in Docker: it can hold more than one library, and each library can ask for a password. The desktop already speaks that API. A NAS session belongs to the server; the app does not keep the password.</p>
         <div class="keys"><span class="key">Local</span><span class="key">Docker</span><span class="key">Several libraries</span></div>
-      </article>
-
-      <article class="card reveal">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h14"/></svg>
-        <h3>Plugins, when the shelf should reach further</h3>
-        <p>Comic indexes, discovery and downloads are plugins, not a list of sites built into the app. With none installed, those shelves stay hidden. Pack one with <code>viora-plugin</code>, install it, and the same library grows. The app does not know a site until a plugin says so.</p>
-        <div class="keys"><span class="key">Sources</span><span class="key">Install on purpose</span></div>
       </article>
 
       <article class="card reveal">
@@ -982,6 +1100,22 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
         <span>Apple Silicon &amp; Intel Macs</span>
         <span>Windows 10 / 11</span>
         <span><b>Free</b></span>
+      </div>
+      <div class="first-open">
+        <p><b>Opening it the first time.</b> The installers are not signed yet, so the system asks before it lets Viora start.</p>
+        <p><b>Mac:</b> unzip, move Viora to Applications and open it. If macOS cannot verify it, choose <i>Open Anyway</i> in System Settings &rarr; Privacy &amp; Security. If it says Viora is damaged, run <code>xattr -dr com.apple.quarantine /Applications/Viora.app</code> in Terminal, then open it again.</p>
+        <p><b>Windows:</b> if SmartScreen stops the installer, choose <i>More info</i> &rarr; <i>Run anyway</i>.</p>
+      </div>
+      <div class="news">
+        <p class="eyebrow">New in 1.10</p>
+        <ul>
+          <li><b>On your phone.</b> The server serves a read-only page: folders, search, photos, video, comics and novels, ready for the home screen.</li>
+          <li><b>Your agent, over MCP.</b> Let an agent you already use look through a library, and, if you allow it, tidy it. Off by default, every change undoable.</li>
+          <li><b>Video that plays.</b> A format the window cannot play converts on the spot and starts before the conversion ends.</li>
+          <li><b>Thirty days of Activity.</b> Every change, filtered by day or by who made it, with Undo.</li>
+          <li><b>And more.</b> Rename a set of files at once, search that stays in its folder, a plugin Store.</li>
+        </ul>
+        <p class="news-note">Upgrading a NAS? Rebuild its image with 1.10 as well: a 1.10 app will not connect to a 1.0 server.</p>
       </div>
       <div class="trust">
         <div><span class="ck">&#10003;</span><span>Your media stays on disk. Local mode listens only on this machine.</span></div>
@@ -1233,6 +1367,8 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
   var viewerArt = document.getElementById("uiViewerArt");
   var viewerName = document.getElementById("uiViewerName");
   var film = document.getElementById("uiFilm");
+  var store = document.getElementById("uiStore");
+  var plugins = document.getElementById("uiPlugins");
   if (!stage || !win || !grid || !recent || !body) return;
 
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1248,7 +1384,8 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
     hover: "Rest on a video. The next frames play on the card, so you never open it just to look.",
     recent: "What you opened last sits under the title. One click continues, and the wall is still underneath.",
     sort: "Name, date or size. The same wall rearranges, and you do not leave the folder.",
-    search: "Type in the bar. The rest of the wall steps aside, and clearing the word brings it back."
+    search: "Type in the bar. The rest of the wall steps aside, and clearing the word brings it back.",
+    store: "New in 1.10: Plugins \u2192 Store. Pick a source or a model pack from the official catalog; it installs only when you say so."
   };
 
   function thumb(item, video){
@@ -1350,6 +1487,35 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
   }
   document.getElementById("uiBack").addEventListener("click", closeViewer);
 
+  function setInstall(btn, state){
+    btn.classList.toggle("busy", state === "busy");
+    btn.classList.toggle("done", state === "done");
+    btn.textContent = state === "busy" ? "Installing\u2026" : state === "done" ? "Installed \u2713" : "Install";
+  }
+  function openStore(){
+    if (!store) return;
+    closeViewer();
+    [].slice.call(store.querySelectorAll(".ui-install")).forEach(function(b){ setInstall(b, ""); });
+    store.classList.add("open");
+    if (plugins) plugins.classList.add("on");
+  }
+  function closeStore(){
+    if (!store) return;
+    store.classList.remove("open");
+    if (plugins) plugins.classList.remove("on");
+  }
+  if (store){
+    if (plugins) plugins.addEventListener("click", openStore);
+    document.getElementById("uiStoreClose").addEventListener("click", closeStore);
+    [].slice.call(store.querySelectorAll(".ui-install")).forEach(function(b){
+      b.addEventListener("click", function(){
+        if (b.classList.contains("busy") || b.classList.contains("done")) return;
+        setInstall(b, "busy");
+        window.setTimeout(function(){ setInstall(b, "done"); }, reduce ? 0 : 1100);
+      });
+    });
+  }
+
   function setBeat(name){
     [].slice.call(stage.querySelectorAll(".ui-beats button")).forEach(function(b){
       b.classList.toggle("on", b.dataset.beat === name);
@@ -1443,6 +1609,7 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
   }
   async function runBeat(name, token){
     setBeat(name);
+    if (name !== "store") closeStore();
     if (name === "hover"){
       closeViewer();
       search.value = "";
@@ -1495,9 +1662,30 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
       await wait(900, token);
       search.value = "";
       applyFilter();
+    } else if (name === "store" && store){
+      closeViewer();
+      search.value = "";
+      applyFilter();
+      // The rail is hidden on a narrow window; the panel then just opens.
+      if (plugins && plugins.offsetParent){
+        await moveCursor(plugins);
+        if (token !== gen) return;
+        await clickCursor();
+      }
+      openStore();
+      await wait(900, token);
+      var install = store.querySelector(".ui-install");
+      await moveCursor(install);
+      if (token !== gen) return;
+      await clickCursor();
+      setInstall(install, "busy");
+      await wait(1100, token);
+      setInstall(install, "done");
+      await wait(1700, token);
+      closeStore();
     }
   }
-  var order = ["hover", "recent", "sort", "search"];
+  var order = ["hover", "store", "recent", "sort", "search"];
   async function loop(token){
     var n = 0;
     while (token === gen){
