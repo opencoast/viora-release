@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
-  "released": "2026-10-02",
+  "version": "1.10.0",
+  "released": "2026-10-18",
   "packages": [
     {
       "os": "darwin",
@@ -25,17 +25,18 @@
     {
       "os": "windows",
       "arch": "x64",
-      "build": 11,
-      "file": "Viora-1.0.0-build.11-win-x64.exe",
-      "url": "https://github.com/opencoast/viora-release/releases/download/viora-v1.0.0-build.11/Viora-1.0.0-build.11-win-x64.exe",
-      "sha256": "edfd560fdab8c61f53b980343fa23ad0ecdf93e180f40695b749be1b08bff6b5",
-      "size": 205633197,
-      "appSha256": "7b6165c2f2de9129d80b0423cc74fb08ae5bc984d3bbdeffd218787222f53ca9"
+      "build": 16,
+      "file": "Viora-1.10.0-build.16-win-x64.exe",
+      "url": "https://github.com/opencoast/viora-release/releases/download/viora-v1.10.0-build.16/Viora-1.10.0-build.16-win-x64.exe",
+      "sha256": "f94829bce3c769cde77d026ab26804dad262baf27df98a10d7042d4eadcb7b71",
+      "size": 206701764,
+      "appSha256": "cced233ac801baa3312a334539dabfa44ab27c6ad491554405d403c957f05cfa"
     }
   ],
   "official": [
     "8cacfacf5acd6fb11e502d9b0dc9830aea56f1da3930e66ab3f9898bc8091f20",
     "5ee0702563e91e9872dc79f9b63730a914378c5e6c45d607b79799ace2251703",
-    "7b6165c2f2de9129d80b0423cc74fb08ae5bc984d3bbdeffd218787222f53ca9"
+    "7b6165c2f2de9129d80b0423cc74fb08ae5bc984d3bbdeffd218787222f53ca9",
+    "cced233ac801baa3312a334539dabfa44ab27c6ad491554405d403c957f05cfa"
   ]
 }
