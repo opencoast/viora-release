@@ -416,6 +416,7 @@ code{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.86em}
 .news li{position:relative; padding-left:1.25rem; font-size:.92rem; color:var(--ink-3); line-height:1.5}
 .news li::before{content:"+"; position:absolute; left:0; top:0; color:var(--gold); font-weight:700}
 .news-note{font-size:.84rem; color:var(--faint); line-height:1.5}
+.news-more{font-size:.9rem; font-weight:600; color:var(--gold); text-underline-offset:3px}
 
 footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); background:var(--wall)}
 .foot{display:flex; flex-wrap:wrap; gap:1.2rem 2rem; align-items:center; justify-content:space-between}
@@ -678,6 +679,7 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
       <a href="#features">Features</a>
       <a href="#origin">The mark</a>
       <a href="#download">Download</a>
+      <a href="changelog.html">Changelog</a>
       <button type="button" class="theme" id="theme">Dark</button>
     </div>
   </div>
@@ -1116,6 +1118,7 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
           <li><b>And more.</b> Rename a set of files at once, search that stays in its folder, a plugin Store.</li>
         </ul>
         <p class="news-note">Upgrading a NAS? Rebuild its image with 1.10 as well: a 1.10 app will not connect to a 1.0 server.</p>
+        <a class="news-more" href="changelog.html">Everything that changed, version by version &rarr;</a>
       </div>
       <div class="trust">
         <div><span class="ck">&#10003;</span><span>Your media stays on disk. Local mode listens only on this machine.</span></div>

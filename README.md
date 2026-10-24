@@ -9,6 +9,7 @@ This repository is the public face of Viora. It is not the application source.
 | File | What it is |
 | --- | --- |
 | `index.html` | The homepage, including the download buttons. |
+| `changelog.html` | What changed in each version, newest first, in the Keep a Changelog format. Edited by hand for each release; the publish script does not write it. |
 | `app.json` | The desktop version the app checks, and the installer links. |
 | `store.json` | The plugin catalog the app installs from. |
 | [Releases](https://github.com/opencoast/viora-release/releases) | The installers and `.vplugin` packages. The git tree does not contain those binaries. |

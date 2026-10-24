@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="What changed in each version of Viora: new features, changes, fixes and removals, newest first.">
+<title>Viora Changelog</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='15 40 170 122'%3E%3Cpath d='M40 43 L97 134 A3.5 3.5 0 0 0 103 134 L160 43' fill='none' stroke='%238f7350' stroke-width='22' stroke-linejoin='round'/%3E%3Cpath d='M24 48 L83 143 A20 20 0 0 0 117 143 L176 48' fill='none' stroke='%23b8912c' stroke-width='11' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Same tokens as index.html, plus one colour per kind of change. */
+:root{
+  --wall:#f3f1eb; --wall-2:#eae7df; --surface:#fdfbf6;
+  --ink:#242229; --ink-2:#494651; --ink-3:#5f5c66; --faint:#77747d;
+  --line:#ddd8cd; --line-2:#cfc9bb;
+  --gold:#836109; --board-hi:#b8912c; --board-lo:#836109; --page:#8f7350;
+  --focus:#9b7109; --spot:rgba(131,97,9,.09);
+  --added:#836109; --changed:#3f5f8a; --fixed:#2f6b45; --removed:#9a3b2e;
+  color-scheme:light;
+}
+:root:not([data-theme="light"]){
+  @media (prefers-color-scheme: dark){
+    --wall:#111217; --wall-2:#16171c; --surface:#1a1b20;
+    --ink:#f2efe8; --ink-2:#c9c7c0; --ink-3:#a7a5a0; --faint:#8b8990;
+    --line:#2b2c33; --line-2:#3a3b44;
+    --gold:#d6ae42; --board-hi:#dcb44c; --board-lo:#b8912c; --page:#ecdfc0;
+    --focus:#e8c25e; --spot:rgba(214,174,66,.16);
+    --added:#d6ae42; --changed:#8fb0dc; --fixed:#7fc597; --removed:#e48b7c;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --wall:#111217; --wall-2:#16171c; --surface:#1a1b20;
+  --ink:#f2efe8; --ink-2:#c9c7c0; --ink-3:#a7a5a0; --faint:#8b8990;
+  --line:#2b2c33; --line-2:#3a3b44;
+  --gold:#d6ae42; --board-hi:#dcb44c; --board-lo:#b8912c; --page:#ecdfc0;
+  --focus:#e8c25e; --spot:rgba(214,174,66,.16);
+  --added:#d6ae42; --changed:#8fb0dc; --fixed:#7fc597; --removed:#e48b7c;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-padding-top:4.5rem}
+body{
+  margin:0; background:var(--wall); color:var(--ink);
+  font-family:"Hanken Grotesk",system-ui,-apple-system,sans-serif;
+  font-size:clamp(1rem,.96rem + .2vw,1.08rem); line-height:1.62;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+h1,h2,h3{font-family:"Fraunces",Georgia,serif; line-height:1.05; letter-spacing:-.012em; text-wrap:balance; margin:0}
+p,ul{margin:0}
+a{color:inherit}
+:where(a,button):focus-visible{outline:2px solid var(--focus); outline-offset:3px; border-radius:4px}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.86em}
+.wrap{width:min(1120px,92vw); margin-inline:auto}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-weight:600;
+  font-size:.72rem; letter-spacing:.24em; text-transform:uppercase; color:var(--gold);
+}
+
+.nav{position:sticky; top:0; z-index:30; background:var(--wall); border-bottom:1px solid var(--line)}
+.nav-inner{width:min(1120px,92vw); margin-inline:auto; display:flex; align-items:center; justify-content:space-between; gap:1rem; min-height:3.6rem}
+.brand{display:flex; align-items:center; gap:.6rem; text-decoration:none; font-family:"Fraunces",serif; font-weight:900; font-size:1.2rem}
+.brand svg{width:36px; height:26px; flex:none}
+.nav-links{display:flex; align-items:center; gap:.2rem 1.15rem; flex-wrap:wrap; justify-content:flex-end}
+.nav-links a{text-decoration:none; color:var(--ink-2); font-size:.94rem; font-weight:500}
+.nav-links a:hover,.nav-links a[aria-current]{color:var(--ink)}
+.theme{
+  font:inherit; font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-2); background:transparent; border:1px solid var(--line-2); border-radius:999px;
+  padding:.35rem .7rem; cursor:pointer;
+}
+.theme:hover{border-color:var(--gold); color:var(--ink)}
+
+.head{
+  padding:clamp(3rem,8vh,5rem) 0 clamp(2rem,5vh,3rem);
+  background:radial-gradient(120% 80% at 50% -10%,var(--spot),transparent 60%),var(--wall);
+  border-bottom:1px solid var(--line);
+}
+.head .wrap{display:flex; flex-direction:column; gap:1rem}
+.head h1{font-weight:900; font-size:clamp(2.4rem,1.8rem + 3vw,3.8rem)}
+.head p{color:var(--ink-2); max-width:58ch}
+.jump{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.4rem}
+.jump a{
+  font-family:"IBM Plex Mono",monospace; font-size:.78rem; text-decoration:none; color:var(--ink-2);
+  border:1px solid var(--line-2); border-radius:999px; padding:.3rem .7rem; background:var(--surface);
+}
+.jump a:hover{border-color:var(--gold); color:var(--ink)}
+.legend{display:flex; flex-wrap:wrap; gap:.4rem 1rem; font-size:.86rem; color:var(--faint)}
+.legend span{display:inline-flex; align-items:center; gap:.4rem}
+.legend i{width:.6rem; height:.6rem; border-radius:50%; background:var(--c)}
+
+.releases{padding:clamp(2.5rem,6vh,4rem) 0 clamp(3rem,8vh,5rem)}
+.release{
+  display:grid; grid-template-columns:13rem minmax(0,1fr); gap:clamp(1.2rem,4vw,3rem);
+  padding:clamp(2rem,5vh,3rem) 0; border-top:1px solid var(--line);
+}
+.release:first-child{border-top:0; padding-top:0}
+.release-meta{position:sticky; top:5rem; align-self:start; display:flex; flex-direction:column; gap:.45rem; align-items:flex-start}
+.release-meta h2{font-weight:900; font-size:clamp(1.9rem,1.5rem + 1.4vw,2.5rem)}
+.release-meta h2 a{text-decoration:none}
+.release-meta h2 a:hover{color:var(--gold)}
+.release-meta time{font-family:"IBM Plex Mono",monospace; font-size:.8rem; color:var(--faint)}
+.latest{
+  font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; font-weight:600;
+  color:#171205; background:linear-gradient(160deg,var(--board-hi),var(--board-lo)); border-radius:999px; padding:.22rem .55rem;
+}
+.release-meta .kind{font-size:.88rem; color:var(--ink-3); max-width:22ch}
+.release-body{display:flex; flex-direction:column; gap:1.6rem; min-width:0}
+.summary{color:var(--ink-2); font-size:clamp(1.02rem,1rem + .3vw,1.15rem); max-width:62ch}
+
+.group h3{
+  display:inline-flex; align-items:center; gap:.5rem;
+  font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:.74rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--c); border:1px solid color-mix(in srgb,var(--c) 45%,var(--line)); background:color-mix(in srgb,var(--c) 9%,transparent);
+  border-radius:999px; padding:.3rem .7rem; margin-bottom:.8rem;
+}
+.group h3::before{content:""; width:.5rem; height:.5rem; border-radius:50%; background:var(--c)}
+.added{--c:var(--added)} .changed{--c:var(--changed)} .fixed{--c:var(--fixed)} .removed{--c:var(--removed)}
+.group ul{list-style:none; padding:0; display:flex; flex-direction:column; gap:.55rem}
+.group li{position:relative; padding-left:1.1rem; color:var(--ink-2); max-width:70ch}
+.group li::before{content:""; position:absolute; left:0; top:.72em; width:.4rem; height:1px; background:var(--line-2)}
+.group li b{color:var(--ink); font-weight:600}
+
+.notes{
+  border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:12px;
+  background:var(--surface); padding:1rem 1.2rem 1.1rem; display:flex; flex-direction:column; gap:.6rem;
+}
+.notes .eyebrow{font-size:.68rem}
+.notes ul{padding-left:1.1rem; display:flex; flex-direction:column; gap:.4rem; color:var(--ink-2); font-size:.95rem}
+
+.more{color:var(--faint); font-size:.92rem}
+.more a{color:var(--gold); text-underline-offset:3px}
+
+footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line)}
+.foot{display:flex; flex-wrap:wrap; gap:1rem 2rem; align-items:center; justify-content:space-between}
+.foot p{color:var(--faint); font-size:.85rem}
+.credit{font-family:"IBM Plex Mono",monospace; font-size:.75rem; letter-spacing:.02em}
+
+@media (max-width:760px){
+  .release{grid-template-columns:1fr; gap:1rem}
+  .release-meta{position:static; flex-direction:row; flex-wrap:wrap; align-items:baseline; gap:.4rem .8rem}
+  .release-meta .kind{max-width:none; width:100%}
+}
+@media (max-width:560px){
+  .nav-inner{align-items:flex-start; flex-wrap:wrap; padding-block:.6rem; row-gap:.45rem}
+  .nav-links{width:100%; justify-content:flex-start}
+  .nav-links a{font-size:.86rem}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a class="brand" href="./">
+      <svg viewBox="15.02 40.70 169.95 120.80" aria-hidden="true">
+        <defs>
+          <linearGradient id="gild-nav" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="var(--board-hi)"/><stop offset="1" stop-color="var(--board-lo)"/>
+          </linearGradient>
+          <clipPath id="nL"><rect x="-200" y="-200" width="300" height="600"/></clipPath>
+          <clipPath id="nR"><rect x="100" y="-200" width="400" height="600"/></clipPath>
+        </defs>
+        <g fill="none" stroke-linejoin="round">
+          <g clip-path="url(#nL)"><path d="M 40.33,43.11 L 97.03,133.85 A 3.5 3.5 0 0 0 102.97,133.85 L 159.67,43.11" stroke="var(--page)" stroke-width="22"/></g>
+          <g clip-path="url(#nR)"><path d="M 40.33,43.11 L 97.03,133.85 A 3.5 3.5 0 0 0 102.97,133.85 L 159.67,43.11" stroke="var(--page)" stroke-width="22"/></g>
+          <path d="M 23.69,47.62 L 83.04,142.60 A 20 20 0 0 0 116.96,142.60 L 176.31,47.62" stroke="url(#gild-nav)" stroke-width="11"/>
+        </g>
+      </svg>
+      Viora
+    </a>
+    <div class="nav-links">
+      <a href="./#features">Features</a>
+      <a href="./#download">Download</a>
+      <a href="changelog.html" aria-current="page">Changelog</a>
+      <button type="button" class="theme" id="theme">Dark</button>
+    </div>
+  </div>
+</nav>
+
+<header class="head">
+  <div class="wrap">
+    <p class="eyebrow">Release notes</p>
+    <h1>Changelog</h1>
+    <p>What changed in each version of Viora, newest first. The format follows <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a>, and version numbers follow <a href="https://semver.org/">Semantic Versioning</a>: a fix release changes the last number.</p>
+    <div class="legend" aria-label="Kinds of change">
+      <span style="--c:var(--added)"><i></i>Added: new features</span>
+      <span style="--c:var(--changed)"><i></i>Changed: existing behaviour</span>
+      <span style="--c:var(--fixed)"><i></i>Fixed: bugs</span>
+      <span style="--c:var(--removed)"><i></i>Removed: features taken out</span>
+    </div>
+    <nav class="jump" aria-label="Versions">
+      <a href="#v1.10.1">1.10.1</a>
+      <a href="#v1.10.0">1.10.0</a>
+      <a href="#v1.0.0">1.0.0</a>
+    </nav>
+  </div>
+</header>
+
+<main class="releases wrap">
+
+  <!-- Newest first. Each release: Added, Changed, Fixed, Removed, in that order, leaving out a kind with nothing in it. -->
+
+  <article class="release" id="v1.10.1">
+    <div class="release-meta">
+      <h2><a href="#v1.10.1">1.10.1</a></h2>
+      <time datetime="2026-10-24">2026-10-24</time>
+      <span class="latest">Latest</span>
+      <p class="kind">Fix release: video frames and safer agent renames.</p>
+    </div>
+    <div class="release-body">
+      <section class="group added">
+        <h3>Added</h3>
+        <ul>
+          <li><b>Frames for a Videos folder.</b> Folder info has a Frames setting (Auto, Fewer, Standard, More) that decides how many frames are taken from each video. Subfolders inherit it.</li>
+          <li><b>Take frames again.</b> Next to Frames, it takes a folder's videos apart again and moves them to the front of recognition. If recognition is not running, it tells you.</li>
+          <li><b>Scenes in the preview strip.</b> Shots that recognition found and the strip missed are added to the video viewer's strip with a mark, so you can jump straight to them.</li>
+          <li><b>For agents:</b> rename up to 200 items as one change that a single Undo takes back, page through a folder's subfolders, and list the changes agents have made.</li>
+        </ul>
+      </section>
+      <section class="group changed">
+        <h3>Changed</h3>
+        <ul>
+          <li><b>How many frames a video gets.</b> The count now grows with the square root of the video's length, instead of one frame every 30 seconds capped at 24. On Standard, a one-minute clip gets about 4 frames, ten minutes 13, an hour 31 and two hours 44. Short clips repeat themselves less, and long films no longer end up with one frame every five minutes.</li>
+          <li><b>A cleaner preview strip.</b> It skips blank moments and shows each shot once, up to 12 frames.</li>
+          <li><b>Server logs name the library.</b> Every line about recognition, jobs, events, agent tools and covers says which library it is about.</li>
+        </ul>
+      </section>
+      <section class="group fixed">
+        <h3>Fixed</h3>
+        <ul>
+          <li>An agent could rename a file without its extension. The file then dropped out of the library along with its tags, and Undo could not find it. A new name must now keep the extension; only its case may change.</li>
+          <li>A folder renamed or created with a name the scanner skips (such as <code>@eaDir</code>, <code>#recycle</code> or <code>$RECYCLE.BIN</code>) disappeared from the library with everything inside it. Those names are now refused.</li>
+          <li>A novel renamed to something like <code>readme.txt</code>, or kept next to a picture with the same name, no longer leaves the library.</li>
+          <li>When an agent's rename, move, delete, undo or restore skips an item, it now explains which rule the item broke, instead of just saying "invalid".</li>
+        </ul>
+      </section>
+      <div class="notes">
+        <p class="eyebrow">Before you upgrade</p>
+        <ul>
+          <li>A 1.10.1 app still connects to a 1.10.0 server. Frames and scene marks need a 1.10.1 server, so rebuild the NAS image to get them.</li>
+          <li>If you use recognition, it goes over the videos whose frame count changed under the new rule. A library with many videos stays busy for a while after the upgrade.</li>
+          <li>Preview strips made before 1.10.1 add scenes less precisely. Use Take frames again on a folder to redo them.</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="release" id="v1.10.0">
+    <div class="release-meta">
+      <h2><a href="#v1.10.0">1.10.0</a></h2>
+      <time datetime="2026-10-18">2026-10-18</time>
+      <p class="kind">Your phone, your own agent over MCP, and the Plugins Store.</p>
+    </div>
+    <div class="release-body">
+      <section class="group added">
+        <h3>Added</h3>
+        <ul>
+          <li><b>On your phone.</b> The server serves a read-only page: pick a library, unlock it, browse folders and search, with viewers for photos, video, comics and novels (txt, md, epub, pdf). Add it to the home screen; over https it opens offline.</li>
+          <li><b>Let a phone into a local library.</b> "Open in a browser · Let a phone in" on the library card. It is off by default, and turning it on requires a password.</li>
+          <li><b>Your own agent, over MCP.</b> Each library can hand an agent you already use a set of tools: overview, folder summaries, search, item details, and looking at pictures, video frames, comic pages and novel text. If you allow it, the agent can also create folders, rename, move, send to Trash and undo. It is off by default and uses a key per library. The AI switch in the sidebar opens the setup guide.</li>
+          <li><b>Agent notes.</b> A third switch lets an agent write down what it saw as a note on an item, with moments for video. Only agent search reads them. Viewers show them as Agent notes, marked as written by an agent.</li>
+          <li><b>Plugins → Store.</b> Install plugins and model packs from the official catalog, through a proxy if you set one.</li>
+          <li><b>Rename in Gather.</b> Replace text, add a prefix or a suffix, and see every old name → new name before anything changes. Collisions and names the server would refuse are held back with the reason. One Undo takes the whole batch back.</li>
+          <li><b>Video conversion you can follow.</b> Progress and time left, cancel and start again, and it keeps going when you leave the viewer. Playback starts as soon as the first part is ready. Large videos use the Mac's hardware encoder and fall back to software if it fails.</li>
+          <li><b>Convert and play</b> for a .mov or .mp4 the player refuses, with the reason the server could not read it. When a video cannot play, the viewer keeps its path, size and Download in view.</li>
+          <li><b>Thirty days of Activity.</b> Every change from the last 30 days (it used to be the last 20), filtered by time or by who made it, grouped by day. Undone changes stay in the list, marked Undone.</li>
+          <li><b>Files.</b> Show in Finder or Explorer; a Recently opened row at the top of My Library (this computer only); remove a Root from a local library; point a NAS Root at a folder mounted on this machine; Trash pages through its items and deletes one for good.</li>
+          <li><b>Saving.</b> Download on a photo saves a full-resolution JPEG without embedded metadata, with the original in the ▾ menu. The comic reader can save the current page.</li>
+          <li><b>Search finds recognition's tags and people</b>, not only file names.</li>
+          <li><b>Video cards play their preview frames</b> when you hover over them.</li>
+          <li><b>Update check.</b> The library picker checks once a day for a new version. A copy that is not an official build is marked Unofficial.</li>
+        </ul>
+      </section>
+      <section class="group changed">
+        <h3>Changed</h3>
+        <ul>
+          <li>A search started in a folder stays in that folder and below, with a way to widen it to the whole library. Results follow the wall's sort, and the "Date" sort is now called "File date".</li>
+          <li>Gather is a selection mode: click or drag to pick, up to 300 items. It refuses the extra items instead of quietly pushing out older ones, and Clear asks first.</li>
+          <li>My Library, Tags, People and Favorites share one right-click menu, one multi-select and one selection bar.</li>
+          <li>Walls update in place as files come and go: cards slide to their new spot instead of the wall flashing empty.</li>
+          <li>Activity names the full destination folder of a move (<code>Moved 3 items to Media/Photos/2025</code>).</li>
+          <li>On a wall, arrow keys move along the grid. Every dialog closes with both × and Esc, and confirmations use Viora's own dialogs.</li>
+          <li>Merging people and "Not this person" ask first, and a face taken out can be put back while the panel is open. A name in the player's info bar opens that person's wall.</li>
+          <li>With the sidebar collapsed, the library icon opens the folder drawer. Saved NAS connections can be renamed and given a new address.</li>
+          <li>Video from a NAS plays more smoothly: the server reads ahead in larger pieces instead of reopening the file several times a second. Videos in one library share a single volume setting.</li>
+          <li>Plugins is arranged by what each plugin does.</li>
+        </ul>
+      </section>
+      <section class="group fixed">
+        <h3>Fixed</h3>
+        <ul>
+          <li>A wall refreshing in the background no longer restarts the video you are watching.</li>
+          <li>A video still converting plays at the library's volume and mute instead of full volume.</li>
+          <li>A search inside a folder stays in that folder while files change elsewhere in the library (a scan, a move, an agent).</li>
+          <li>A search that found folders but no files no longer says the library is empty.</li>
+          <li>The sidebar and the wall follow files moved between folders, including moves made by an agent or by Undo.</li>
+          <li>A download landing in the folder you are reading no longer makes the reader flicker.</li>
+          <li>On macOS, changing only the case of a name (IMG → img) is no longer treated as a collision.</li>
+          <li>On the phone page: a broken comic page is no longer fetched over and over; the page lines up after rotating; back returns to where you were; nothing sits under the Home indicator.</li>
+        </ul>
+      </section>
+      <section class="group removed">
+        <h3>Removed</h3>
+        <ul>
+          <li>The sidebar AI (Beta). Its saved endpoint, encrypted API key and chats are deleted the first time 1.10 starts. Connect your own agent over MCP instead.</li>
+        </ul>
+      </section>
+      <div class="notes">
+        <p class="eyebrow">Before you upgrade</p>
+        <ul>
+          <li>Update the app and the server together. A 1.10 app will not connect to a 1.0 server, so rebuild the NAS image as well.</li>
+          <li>Once a library has been opened by 1.10, do not go back to a 1.0 server.</li>
+          <li>The phone page needs https to open offline. Over http it works, but it caches nothing and its traffic is not encrypted.</li>
+          <li>On iPhone, remove an icon you already added to the home screen and add it again.</li>
+          <li>Known issue: in iPhone home-screen mode, the strip at the top takes the system status bar's colour instead of the page's (an iOS 26 issue).</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="release" id="v1.0.0">
+    <div class="release-meta">
+      <h2><a href="#v1.0.0">1.0.0</a></h2>
+      <time datetime="2026-09-28">2026-09-28</time>
+      <p class="kind">First release.</p>
+    </div>
+    <div class="release-body">
+      <p class="summary">The first public version of Viora: a desktop library for the folders you already keep, on this computer or on a NAS.</p>
+      <section class="group added">
+        <h3>Added</h3>
+        <ul>
+          <li><b>One wall for everything.</b> Photos, video, comics and novels in one scroll, indexed in place. Nothing is imported or copied.</li>
+          <li><b>A room for each kind of file:</b> a photo and video viewer, a comic reader and a novel reader. Folders can be typed as Images, Videos, Comics or Novels.</li>
+          <li><b>This computer or a NAS.</b> The app starts its own local server, or connects to the same server running in Docker, with several libraries if you want them.</li>
+          <li><b>Tags, people and favorites</b>, each with its own wall. Recognition runs only after you install a model pack and allow it.</li>
+          <li><b>File management</b> that keeps tags and details through renames and moves, with a Trash and Undo.</li>
+          <li><b>Source plugins</b> that add details from outside sites, installed only when you choose to.</li>
+        </ul>
+      </section>
+    </div>
+  </article>
+
+  <p class="more">Every installer, including older builds, is on <a href="https://github.com/opencoast/viora-release/releases">GitHub Releases</a>. Within one version, a newer build number repackages the same release.</p>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>A personal media library for photos, video, comics and novels.</p>
+    <p class="credit">Viora · © 2026 opencoast.io · https://viora.opencoast.io</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  // Same key as the homepage, so a chosen theme carries over between pages.
+  var themeBtn = document.getElementById("theme");
+  function systemDark(){
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+  function paintTheme(mode){
+    var root = document.documentElement;
+    if (mode === "light" || mode === "dark") root.setAttribute("data-theme", mode);
+    else root.removeAttribute("data-theme");
+    var dark = mode === "dark" || (mode !== "light" && systemDark());
+    themeBtn.textContent = dark ? "Light" : "Dark";
+    themeBtn.setAttribute("aria-pressed", dark ? "true" : "false");
+  }
+  var stored = "system";
+  try { stored = localStorage.getItem("viora-theme") || "system"; } catch (e) {}
+  paintTheme(stored);
+  themeBtn.addEventListener("click", function(){
+    var cur = document.documentElement.getAttribute("data-theme");
+    var next = cur === "dark" ? "light" : "dark";
+    if (!cur) next = systemDark() ? "light" : "dark";
+    try { localStorage.setItem("viora-theme", next); } catch (e) {}
+    paintTheme(next);
+  });
+})();
+</script>
+</body>
+</html>
