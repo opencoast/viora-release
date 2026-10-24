@@ -406,11 +406,18 @@ code{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.86em}
 .trust{display:grid; grid-template-columns:repeat(2,1fr); gap:.7rem 2rem; margin-top:.6rem; max-width:680px; text-align:left}
 .trust div{display:grid; grid-template-columns:auto 1fr; gap:.6rem; font-size:.9rem; color:var(--ink-3); line-height:1.45}
 .trust .ck{color:var(--gold); font-weight:700}
-.first-open,.news{width:100%; max-width:680px; text-align:left}
+.first-open,.nas,.news{width:100%; max-width:680px; text-align:left}
 .first-open{display:grid; gap:.45rem; border-left:2px solid var(--gold); padding:.15rem 0 .15rem 1rem;
   font-size:.88rem; color:var(--ink-3); line-height:1.55}
 .first-open b,.news li b{color:var(--ink-2); font-weight:600}
 .first-open code{font-family:"IBM Plex Mono",monospace; font-size:.78rem; overflow-wrap:anywhere}
+.nas{display:grid; gap:.6rem; min-width:0; font-size:.88rem; color:var(--ink-3); line-height:1.55}
+.nas b{color:var(--ink-2); font-weight:600}
+.nas code{font-family:"IBM Plex Mono",monospace; font-size:.78rem}
+.nas pre{margin:0; max-width:100%; overflow-x:auto; padding:.8rem 1rem; border:1px solid var(--line); border-radius:12px;
+  background:var(--wall-2); color:var(--ink-2); line-height:1.6}
+.nas pre code{font-size:.76rem; white-space:pre}
+.nas a{color:var(--gold); text-underline-offset:3px}
 .news{display:grid; gap:.8rem; border:1px solid var(--line); border-radius:16px; padding:1.2rem 1.4rem}
 .news ul{list-style:none; margin:0; padding:0; display:grid; gap:.55rem}
 .news li{position:relative; padding-left:1.25rem; font-size:.92rem; color:var(--ink-3); line-height:1.5}
@@ -1108,6 +1115,25 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
         <p><b>Mac:</b> unzip, move Viora to Applications and open it. If macOS cannot verify it, choose <i>Open Anyway</i> in System Settings &rarr; Privacy &amp; Security. If it says Viora is damaged, run <code>xattr -dr com.apple.quarantine /Applications/Viora.app</code> in Terminal, then open it again.</p>
         <p><b>Windows:</b> if SmartScreen stops the installer, choose <i>More info</i> &rarr; <i>Run anyway</i>.</p>
       </div>
+      <div class="nas" id="nas">
+        <p><b>On a NAS.</b> The server is a Docker image for x86 (amd64) and ARM (arm64) machines. Put a <code>viora.json</code> in the config folder, then start it:</p>
+        <pre><code>docker pull ghcr.io/opencoast/viora-server:latest
+docker run -d --name viora -p 8420:8420 \
+  -v /volume1/docker/viora/data:/data \
+  -v /volume1/docker/viora/config:/config:ro \
+  -v /volume1/photos:/media/photos \
+  ghcr.io/opencoast/viora-server:latest</code></pre>
+        <p><code>viora.json</code> lists the libraries, with folders as paths inside the container. A password is optional:</p>
+        <pre><code>{
+  "listen": ":8420",
+  "dataDir": "/data",
+  "libraries": [
+    { "id": "family", "name": "Family", "password": "change-me",
+      "roots": [{ "path": "/media/photos" }] }
+  ]
+}</code></pre>
+        <p>In the app, choose <i>Add a NAS</i> and enter <code>http://&lt;your-nas&gt;:8420</code> as the server address. To stay on one release, use a <a href="https://github.com/orgs/opencoast/packages/container/package/viora-server">version tag</a> instead of <code>latest</code>. To upgrade, pull again and recreate the container.</p>
+      </div>
       <div class="news">
         <p class="eyebrow">New in 1.10</p>
         <ul>
@@ -1117,7 +1143,7 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line); backg
           <li><b>Thirty days of Activity.</b> Every change, filtered by day or by who made it, with Undo.</li>
           <li><b>And more.</b> Rename a set of files at once, search that stays in its folder, a plugin Store.</li>
         </ul>
-        <p class="news-note">Upgrading a NAS? Rebuild its image with 1.10 as well: a 1.10 app will not connect to a 1.0 server.</p>
+        <p class="news-note">Upgrading a NAS? Pull the new image as well: a 1.10 app will not connect to a 1.0 server.</p>
         <a class="news-more" href="changelog.html">Everything that changed, version by version &rarr;</a>
       </div>
       <div class="trust">

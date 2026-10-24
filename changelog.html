@@ -241,7 +241,7 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line)}
       <div class="notes">
         <p class="eyebrow">Before you upgrade</p>
         <ul>
-          <li>A 1.10.1 app still connects to a 1.10.0 server. Frames and scene marks need a 1.10.1 server, so rebuild the NAS image to get them.</li>
+          <li>A 1.10.1 app still connects to a 1.10.0 server. Frames and scene marks need a 1.10.1 server: on a NAS, pull <code>ghcr.io/opencoast/viora-server:1.10.1</code> and recreate the container (<a href="./#nas">how</a>).</li>
           <li>If you use recognition, it goes over the videos whose frame count changed under the new rule. A library with many videos stays busy for a while after the upgrade.</li>
           <li>Preview strips made before 1.10.1 add scenes less precisely. Use Take frames again on a folder to redo them.</li>
         </ul>
