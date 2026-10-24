@@ -1,16 +1,16 @@
 {
-  "version": "1.10.0",
-  "released": "2026-10-18",
+  "version": "1.10.1",
+  "released": "2026-10-24",
   "packages": [
     {
       "os": "darwin",
       "arch": "arm64",
-      "build": 16,
-      "file": "Viora-1.10.0-build.16-mac-arm64.zip",
-      "url": "https://github.com/opencoast/viora-release/releases/download/viora-v1.10.0-build.16/Viora-1.10.0-build.16-mac-arm64.zip",
-      "sha256": "4f1841a4147fb31c69e7b4cc2048765a7ac1258c500d87cd56aec79c6db973e6",
-      "size": 199345747,
-      "appSha256": "1da379214448f1924b5962d68bf0fef1a35c34f2ffe35005aea9ae81d6c21189"
+      "build": 17,
+      "file": "Viora-1.10.1-build.17-mac-arm64.zip",
+      "url": "https://github.com/opencoast/viora-release/releases/download/viora-v1.10.1-build.17/Viora-1.10.1-build.17-mac-arm64.zip",
+      "sha256": "404a64be48fb756278c1460bc02fe7dbbca52547a0d04e8ddc716eccc99a8816",
+      "size": 199369988,
+      "appSha256": "2f94c3591a1574e372f457020c751ede2c2de265df777bfc0c2a4e821e420574"
     },
     {
       "os": "darwin",
@@ -39,6 +39,7 @@
     "7b6165c2f2de9129d80b0423cc74fb08ae5bc984d3bbdeffd218787222f53ca9",
     "cced233ac801baa3312a334539dabfa44ab27c6ad491554405d403c957f05cfa",
     "291cb20b1d781904937e2940bc7556ca8b2c3a6e484f326420330162ecb92466",
-    "1da379214448f1924b5962d68bf0fef1a35c34f2ffe35005aea9ae81d6c21189"
+    "1da379214448f1924b5962d68bf0fef1a35c34f2ffe35005aea9ae81d6c21189",
+    "2f94c3591a1574e372f457020c751ede2c2de265df777bfc0c2a4e821e420574"
   ]
 }
