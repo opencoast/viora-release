@@ -25,12 +25,12 @@
     {
       "os": "windows",
       "arch": "x64",
-      "build": 17,
-      "file": "Viora-1.10.1-build.17-win-x64.exe",
-      "url": "https://github.com/opencoast/viora-release/releases/download/viora-v1.10.1-build.17/Viora-1.10.1-build.17-win-x64.exe",
-      "sha256": "6abee7e5e2078c3096b341ff6e7946a3ef810f7e663c43787599e27d9179d318",
-      "size": 206723774,
-      "appSha256": "727d038a248f669db679d5602c9e4eb270bb07585552c7d2b2e340c194cdb8a9"
+      "build": 18,
+      "file": "Viora-1.10.2-build.18-win-x64.exe",
+      "url": "https://github.com/opencoast/viora-release/releases/download/viora-v1.10.2-build.18/Viora-1.10.2-build.18-win-x64.exe",
+      "sha256": "9619cd11e9bf22507348d284764f4964e4e143b269d98dbb9810a666068a196c",
+      "size": 206827163,
+      "appSha256": "dc945b17567d11e39ed98a5f90d8932f41dd62bacf6082cb70da4c84706a3d1e"
     }
   ],
   "official": [
@@ -44,6 +44,7 @@
     "faee5ed8cdebe2baed7c7c521ae9187340cddf0ba90f5b24d34caf87965da5a6",
     "727d038a248f669db679d5602c9e4eb270bb07585552c7d2b2e340c194cdb8a9",
     "2f286bba080c71d4b26a8b77950ecbc6e438cbac8e98dc851d216973e93e979d",
-    "a1aeb1b742cefe31179b981f1745e90163b204a32bb2b387ecb80e94da856850"
+    "a1aeb1b742cefe31179b981f1745e90163b204a32bb2b387ecb80e94da856850",
+    "dc945b17567d11e39ed98a5f90d8932f41dd62bacf6082cb70da4c84706a3d1e"
   ]
 }
