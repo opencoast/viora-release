@@ -193,6 +193,7 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line)}
       <span style="--c:var(--removed)"><i></i>Removed: features taken out</span>
     </div>
     <nav class="jump" aria-label="Versions">
+      <a href="#v1.10.2">1.10.2</a>
       <a href="#v1.10.1">1.10.1</a>
       <a href="#v1.10.0">1.10.0</a>
       <a href="#v1.0.0">1.0.0</a>
@@ -204,11 +205,67 @@ footer{padding:clamp(2.5rem,6vh,4rem) 0; border-top:1px solid var(--line)}
 
   <!-- Newest first. Each release: Added, Changed, Fixed, Removed, in that order, leaving out a kind with nothing in it. -->
 
+  <article class="release" id="v1.10.2">
+    <div class="release-meta">
+      <h2><a href="#v1.10.2">1.10.2</a></h2>
+      <time datetime="2026-11-15">2026-11-15</time>
+      <span class="latest">Latest</span>
+      <p class="kind">Tidying folders, reading comics, and a calmer picture viewer.</p>
+    </div>
+    <div class="release-body">
+      <section class="group added">
+        <h3>Added</h3>
+        <ul>
+          <li><b>Flatten into…</b> Gather can move every gathered file, and every file inside gathered folders, straight into one folder as a single change that one Undo takes back. A name already taken gets its old folder's name in front; nothing is overwritten, and folders left empty go to the trash.</li>
+          <li><b>Up one level.</b> Move to… has a fixed row above Recent that moves things into the folder above.</li>
+          <li><b>Pages overview for comics.</b> Pages next to the page count (or G) shows the whole book as a grid. Hover a page to see it large, type a number to jump, and set the cell size.</li>
+          <li><b>Choose a comic's cover.</b> Set as cover in the reader makes the page on screen the book's cover everywhere; Reset cover brings back its own.</li>
+          <li><b>Four picture sizes.</b> The viewer's zoom controls switch between Shrink to fit, Fit window, Fit width and Actual size, and remember the choice.</li>
+          <li><b>Follow the system theme.</b> The theme button cycles Follow system, Dark and Light. New installs follow the system.</li>
+          <li><b>More on comic cards.</b> A gallery's type (doujinshi, artist CG, …) shows as a badge, and a finished book still shows its page count. In Check new works, unusually long works are marked, and hovering the author or tag line shows the full list.</li>
+          <li><b>In the browser:</b> share from the item menu, see how far through a book you are, keep the screen on while reading or watching, pinch to change the number of columns, and tap any step of the breadcrumb.</li>
+        </ul>
+      </section>
+      <section class="group changed">
+        <h3>Changed</h3>
+        <ul>
+          <li><b>Gather lets go of finished work.</b> After Delete, Move to… or Flatten into…, what was done leaves Gather and what could not be done stays. Undo puts it back.</li>
+          <li><b>The sidebar opens folders while Gather is open.</b> Click a folder's name to open it; click its icon to add it to Gather.</li>
+          <li><b>Comic reading habits are kept for every book.</b> One or two pages and right-to-left no longer have to be set again in each volume.</li>
+          <li><b>Shorter tags.</b> Tags like <code>female:</code> or <code>artist:</code> show just the name after the colon. Search and filters still use the full tag.</li>
+          <li><b>A tidier wall toolbar.</b> Tile size, Fill / Fit and captions sit under View, and Folder type names the type in use.</li>
+          <li><b>Easier-to-read small text</b> across the desktop app, plus a dozen small layout fixes.</li>
+          <li><b>In the browser:</b> the viewer closes with ×, a tap hides the bars, swipes replace Previous and Next on touch screens, and photos fill a denser grid.</li>
+        </ul>
+      </section>
+      <section class="group fixed">
+        <h3>Fixed</h3>
+        <ul>
+          <li>The sidebar folder tree no longer jumps back to the open folder after you delete, rename or move folders.</li>
+          <li>A move that was refused looked like nothing happened. The Move dialog now stays inside the window and says why at the top.</li>
+          <li>Stepping from a wide picture to a tall one looked like turning two pictures. The viewer now changes the picture once.</li>
+          <li>Small pictures are no longer enlarged past their own size, and the zoom shows the true scale.</li>
+          <li>A drag-select in Gather that scrolled the wall left out the rows in the middle.</li>
+          <li>Comics whose first page is an animated WebP had no thumbnail.</li>
+          <li>Check new works could show an old page of results and hide newer works.</li>
+          <li>The Images wall kept re-laying itself out at seven columns.</li>
+          <li>In the browser, Back from the viewer could fail to return to the list.</li>
+        </ul>
+      </section>
+      <div class="notes">
+        <p class="eyebrow">Before you upgrade</p>
+        <ul>
+          <li>A 1.10.2 app still connects to a 1.10.1 server. Flatten into… and Set as cover need a 1.10.2 server: on a NAS, pull <code>ghcr.io/opencoast/viora-server:1.10.2</code> and recreate the container (<a href="./#nas">how</a>).</li>
+          <li>The first time a library opens after the upgrade, it fills in the type of each comic, which takes a little longer in a large comic library.</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
   <article class="release" id="v1.10.1">
     <div class="release-meta">
       <h2><a href="#v1.10.1">1.10.1</a></h2>
       <time datetime="2026-10-24">2026-10-24</time>
-      <span class="latest">Latest</span>
       <p class="kind">Fix release: video frames and safer agent renames.</p>
     </div>
     <div class="release-body">
